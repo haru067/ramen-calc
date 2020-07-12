@@ -1,7 +1,7 @@
 <template>
   <div class="calculator">
     <h2>
-      茹で
+      合計
       <input type="number" min="0" max="10000" size="8" v-model="state.amountTotal" />g 作る
     </h2>
     <table>
@@ -47,7 +47,7 @@
       </tbody>
     </table>
     <p>
-      <a href="https://twitter.com/intent/tweet?text=Hello%20world">ツイートして自慢する</a>
+      <a v-bind:href="state.shareText">ツイートして自慢する</a>
     </p>
   </div>
 </template>
@@ -57,12 +57,20 @@ import { reactive, computed } from "vue";
 
 export default {
   setup() {
+    function getShareText(state) {
+      let eggText = "";
+      if (state.amountEgg > 0) {
+        eggText = `, 卵 ${state.amountEgg}g`;
+      }
+      return `小麦粉 ${state.amountFlour}g, 水 ${state.amountWater}ml, 塩 ${state.amountSalt}g, かんすい ${state.amountIyeWater}g${eggText} ${window.location.href}`;
+    }   
+
     const state = reactive({
       rateWater: 35,
       rateSalt: 1,
       rateIyeWater: 1,
       rateEgg: 0,
-      amountTotal: 0,
+      amountTotal: 500,
       amountFlour: computed(
         () =>
           (100 * state.amountTotal) /
@@ -78,7 +86,7 @@ export default {
         () => (state.amountFlour * state.rateIyeWater) / 100
       ),
       amountEgg: computed(() => (state.amountFlour * state.rateEgg) / 100),
-      shareText: computed(() => (state.amountFlour * state.rateEgg) / 100)
+      shareText: computed(() => "https://twitter.com/intent/tweet?text=" + getShareText(state))
     });
 
     return {
@@ -88,22 +96,38 @@ export default {
 };
 </script>
 
-<style>
-h1 {
+<style scoped>
+table {
+  margin: 32px;
+}
+
+th {
   text-align: center;
+  padding: 4px 16px;
 }
 
 td {
   padding: 4px 16px;
 }
 
-.calculator {
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 16px;
+h2 {
+  text-align: center;
 }
 
-.amount {
+p {
+  text-align: center;
+}
+
+div.calculator {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  margin: 0px 32px;
+  padding: 16px;
+  text-align: left;
+}
+
+td.amount,
+th.amount {
   text-align: right;
 }
 </style>
