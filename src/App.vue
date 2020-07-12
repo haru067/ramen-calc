@@ -19,37 +19,10 @@ export default {
     TotalCalculator
   },
   setup() {
-    const state = reactive({
-      rateWater: 35,
-      rateSalt: 1,
-      rateIyeWater: 1,
-      rateEgg: 0,
-      amountTotal: 0,
-      amountFlour: computed(
-        () =>
-          (100 * state.amountTotal) /
-          (100.0 +
-            state.rateWater +
-            state.rateEgg +
-            state.rateSalt +
-            state.rateIyeWater)
-      ),
-      amountWater: computed(() => (state.amountFlour * state.rateWater) / 100),
-      amountSalt: computed(() => (state.amountFlour * state.rateSalt) / 100),
-      amountIyeWater: computed(
-        () => (state.amountFlour * state.rateIyeWater) / 100
-      ),
-      amountEgg: computed(() => (state.amountFlour * state.rateEgg) / 100),
-      shareText: computed(() => (state.amountFlour * state.rateEgg) / 100)
-    });
-
-    function increment() {
-      state.count++;
-    }
+    const state = reactive({});
 
     return {
-      state,
-      increment
+      state
     };
   }
 };
