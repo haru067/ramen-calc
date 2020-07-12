@@ -1,7 +1,7 @@
 <template>
   <div class="calculator">
     <h2>
-      茹で前
+      茹で
       <input type="number" min="0" max="10000" size="8" v-model="state.amountTotal" />g 作る
     </h2>
     <table>
@@ -88,9 +88,8 @@ export default {
 };
 </script>
 
-<style scoped>
-
-th {
+<style>
+h1 {
   text-align: center;
 }
 
@@ -98,12 +97,10 @@ td {
   padding: 4px 16px;
 }
 
-div.calculator {
+.calculator {
   border: 1px solid #ccc;
   border-radius: 8px;
-  margin: 0px 32px;
   padding: 16px;
-  text-align: left;
 }
 
 .amount {
