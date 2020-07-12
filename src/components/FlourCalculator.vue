@@ -78,11 +78,11 @@ export default {
         () => (state.amountFlour * state.rateIyeWater) / 100
       ),
       amountEgg: computed(() => (state.amountFlour * state.rateEgg) / 100),
-      shareText: computed(() => (state.amountFlour * state.rateEgg) / 100),
+      shareText: computed(() => (state.amountFlour * state.rateEgg) / 100)
     });
 
     return {
-      state,
+      state
     };
   }
 };
