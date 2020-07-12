@@ -37,7 +37,7 @@
           <td>
             <input type="number" min="0" max="100" size="4" v-model="state.rateEgg" />%
           </td>
-          <td class="amount">{{state.amountEgg.toFixed(1)}}g</td>
+          <td class="amount">{{state.amountEgg.toFixed()}}g</td>
         </tr>
         <tr>
           <th>合計</th>
@@ -60,10 +60,16 @@ export default {
     function getShareText(state) {
       let eggText = "";
       if (state.amountEgg > 0) {
-        eggText = `, 卵 ${state.amountEgg}g`;
+        eggText = `, 卵 ${state.amountEgg.toFixed()}g`;
       }
-      return `小麦粉 ${state.amountFlour}g, 水 ${state.amountWater}ml, 塩 ${state.amountSalt}g, かんすい ${state.amountIyeWater}g${eggText} ${window.location.href}`;
-    }   
+      return (
+        `小麦粉 ${state.amountFlour.toFixed()}g` +
+        `, 水 ${state.amountWater.toFixed()}ml` +
+        `, 塩 ${state.amountSalt.toFixed(1)}g,` +
+        ` かんすい ${state.amountIyeWater.toFixed(1)}g` +
+        `${eggText} ${window.location.href}`
+      );
+    }
 
     const state = reactive({
       rateWater: 35,
@@ -85,7 +91,9 @@ export default {
           state.amountIyeWater +
           state.amountEgg
       ),
-      shareText: computed(() => "https://twitter.com/intent/tweet?text=" + getShareText(state))
+      shareText: computed(
+        () => "https://twitter.com/intent/tweet?text=" + getShareText(state)
+      )
     });
 
     return {
